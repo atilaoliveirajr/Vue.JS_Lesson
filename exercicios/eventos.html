@@ -1,15 +1,57 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>Eventos</title>
     <link rel="stylesheet" href="/css/estilo.css">
     <script src="/js/vue.min.js"></script>
 </head>
+
 <body class="exercicio">
+    <div id="app">
+        <p>{{ contador }}</p>
+        <p>
+            <!-- sintaxe normal -->
+            <button v-on:click="add"> + 1</button>
+            <!-- sintaxe reduzida -->
+            <button @click="contador -= 2"> - 2</button>
+
+            <p @mousemove="atualizarPosicaoMouse">
+                Coordenadas: {{posicao_eixo_x_mouse}} e {{posicao_eixo_y_mouse}}
+                <p @mousemove.stop>Aqui não</p>
+                <p @mousemove="stop">Aqui não também</p>
+            </p>
+
+            <input type="text" @keyup.enter="alerta">
+        </p>
+    </div>
 
     <script>
-        // ...
+        new Vue({
+            el: "#app",
+            data: {
+                contador: Number = 0,
+                posicao_eixo_x_mouse: Number = 0,
+                posicao_eixo_y_mouse: Number = 0,
+            },
+            methods: {
+                add() {
+                    this.contador++
+                },
+                atualizarPosicaoMouse(e) {
+                    this.posicao_eixo_x_mouse = e.clientX,
+                        this.posicao_eixo_y_mouse = e.clientY
+                },
+                stop(e) {
+                    e.stopPropagation()
+                },
+                alerta() {
+                    alert('alerta')
+                }
+            }
+        })
     </script>
 </body>
+
 </html>
