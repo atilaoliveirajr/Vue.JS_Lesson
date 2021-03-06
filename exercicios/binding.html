@@ -1,15 +1,39 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>Binding</title>
     <link rel="stylesheet" href="/css/estilo.css">
     <script src="/js/vue.min.js"></script>
 </head>
-<body class="exercicio">
 
+<body class="exercicio">
+    <div id="app">
+        <p>
+            <a :href="link">Canal WB</a>
+        </p>
+        <p>
+            <input type="text" :value="name" v-model="name"></input>
+        </p>
+
+        <span>{{ name }}</span>
+
+    </div>
     <script>
-        // ...
+        new Vue({
+            el: "#app",
+            data: {
+                link: 'https://www.youtube.com/',
+                name: 'Atila'
+            },
+            watch: {
+                name(novoValor) {
+                    console.log(novoValor.toUpperCase());
+                }
+            }
+        })
     </script>
 </body>
+
 </html>
